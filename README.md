@@ -24,7 +24,7 @@ Metric definitions and design notes: [docs/DESIGN.md](docs/DESIGN.md).
 
 | Week | Active days | Focused | Tasks done | AI independence | Mistakes fixed |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| W1 * | 0 / 1 | 0m | - | - | 0 / 0 |
+| W1 * | 0 / 1 | 0m | - | - | 0 / 1 |
 
 \* week in progress. AI independence is self-reported.
 
@@ -50,10 +50,10 @@ Metric definitions and design notes: [docs/DESIGN.md](docs/DESIGN.md).
 
 |  |  |
 | --- | --- |
-| Documented | 0 |
-| Resolved | 0 (-) |
+| Documented | 1 |
+| Resolved | 0 (0%) |
 | Repeated | 0 |
-| Most common areas | - |
+| Most common areas | react 1 |
 
 #### Last 12 weeks
 
