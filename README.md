@@ -2,136 +2,155 @@
 
 Personal learning journal for becoming a stronger Frontend Engineer.
 
-## 🎯 Main Goal
+**Goal:** practical depth in JavaScript, TypeScript, React, debugging, frontend architecture,
+design patterns, live coding and problem solving, plus typing and technical English.
 
-Build strong practical knowledge in:
+Daily files are plain Markdown. A small CLI validates them and derives the dashboard below.
+Metric definitions and design notes: [docs/DESIGN.md](docs/DESIGN.md).
 
-* JavaScript
-* TypeScript
-* React
-* Debugging
-* Frontend Architecture
-* Design Patterns
-* Browser & Web Fundamentals
-* Technical English
-* Live Coding
-* Problem Solving
+## Dashboard
 
-## 🗺️ Current Roadmap
+<!-- dashboard:start -->
 
-### Month 1 — JavaScript
+|  |  |
+| --- | --- |
+| Program | Week 1 of 25 |
+| Current phase | JavaScript |
+| Streak | 0 days (longest 0) |
+| Focused time | 0m |
+| Topics closed | 0 / 43 |
 
-* Functions
-* Scope & Closure
-* `this`
-* Array Methods
-* Objects
-* Async JavaScript
-* Promises
-* Event Loop
+#### Weekly trend
 
-### Month 2 — TypeScript
+| Week | Active days | Focused | Tasks done | AI independence | Mistakes fixed |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| W1 * | 0 / 1 | 0m | - | - | 0 / 0 |
 
-* Types
-* Unions & Narrowing
-* Generics
-* Utility Types
-* API Models
-* Type-safe React
+\* week in progress. AI independence is self-reported.
 
-### Month 3 — Debugging & Live Coding
+#### Roadmap
 
-* Chrome DevTools
-* React DevTools
-* Debugging JavaScript
-* Debugging React
-* Live Coding
+| Phase | Closed | Progress |
+| --- | ---: | --- |
+| JavaScript | 0 / 8 | `░░░░░░░░░░` 0% |
+| TypeScript | 0 / 6 | `░░░░░░░░░░` 0% |
+| Debugging and live coding | 0 / 7 | `░░░░░░░░░░` 0% |
+| React architecture | 0 / 6 | `░░░░░░░░░░` 0% |
+| Design patterns | 0 / 9 | `░░░░░░░░░░` 0% |
+| Engineering project | 0 / 7 | `░░░░░░░░░░` 0% |
 
-### Month 4 — React Architecture
+#### Skills vs baseline
 
-* Component Design
-* State Ownership
-* Feature-based Architecture
-* Layered Architecture
-* Naming
-* Separation of Concerns
+|  | Baseline | Latest | Target |
+| --- | ---: | ---: | ---: |
+| Typing | - | - | 60 WPM |
+| Benchmarks solved without AI | - | - | - |
 
-### Month 5 — Design Patterns
+#### Mistakes
 
-* Composition
-* Strategy
-* Factory
-* Adapter
-* Facade
-* Observer
-* Repository
-* Dependency Injection
-* Refactoring
+|  |  |
+| --- | --- |
+| Documented | 0 |
+| Resolved | 0 (-) |
+| Repeated | 0 |
+| Most common areas | - |
 
-### Month 6 — Engineering Project
+#### Last 12 weeks
 
-* Build
-* Debug
-* Refactor
-* Optimize
-* Architecture Review
-* Interview Simulation
+```text
+Sat                         
+Sun                         
+Mon                         
+Tue                         
+Wed                        ·
+Thu                         
+Fri                         
 
-## 📅 Current Focus
+· none   ░ partial   ▒ minimum   ▓ good   █ excellent   ○ excused
+```
 
-**Week:** 1
-**Topic:** JavaScript Functions
+#### Notes
 
-## 🔥 Daily Habits
+- No entries yet. Run `journal new` to create today's log.
 
-* [ ] 15 min typing
-* [ ] 30–45 min coding
-* [ ] 20 min technical documentation
-* [ ] 20 min English
-* [ ] Review one mistake
-* [ ] Write one useful note
+<sub>Last entry: none</sub>
 
-## 🤖 AI Rule
+<!-- dashboard:end -->
 
-### Green
+## Roadmap
 
-I can solve it → solve without AI.
+Six four-week phases, tracked topic by topic in [roadmap.yml](roadmap.yml):
+JavaScript, TypeScript, debugging and live coding, React architecture, design patterns,
+and an engineering project. A topic is closed only when all four criteria in that file hold.
 
-### Yellow
+## Daily minimum
 
-I'm stuck → try for 20–30 minutes, then ask AI only for a hint.
+Targets live in [config.yml](config.yml). On a hard day, this is enough to keep the habit:
 
-### Red
+- 15 minutes of typing
+- one 30-minute block of coding or study
+- one sentence of what I learned
 
-I don't understand the concept → ask AI for explanation, then close it and implement it again from scratch.
+## AI rule
 
-## 📊 Progress
+| Level | Situation | What I do |
+|---|---|---|
+| independent | I can solve it | Solve without AI |
+| hint | I am stuck | Try for 20-30 minutes, then ask AI for a hint only |
+| explained | I do not understand the concept | Ask for an explanation, close it, implement again from scratch |
 
-| Area            | Status |
-| --------------- | ------ |
-| JavaScript      | 🟡     |
-| TypeScript      | 🔴     |
-| React           | 🟡     |
-| Debugging       | 🔴     |
-| Architecture    | 🔴     |
-| Design Patterns | 🔴     |
-| Live Coding     | 🔴     |
-| English         | 🟡     |
-| Typing          | 🟡     |
+Log the level in each daily file (`ai:`). The dashboard tracks the trend.
 
-## 📝 Weekly Reviews
+## Setup
 
-Weekly progress is documented in:
+```bash
+python -m venv .venv
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
+pip install -e ".[dev]"
+```
 
-`weekly-review/`
+## Daily workflow
 
-## 🧠 Mistakes
+```bash
+git pull --rebase
+journal new                       # creates daily/YYYY-MM-DD.md
+# work, then fill in minutes, tasks and one "learned" line
+journal mistake "Stale closure in useEffect" --area react
+journal validate
+git add . && git commit -m "journal: 2026-10-07" && git push
+```
 
-Important mistakes and lessons are documented in:
+Pushing to `main` runs GitHub Actions, which validates the files and refreshes the dashboard.
 
-`mistakes.md`
+## Weekly and phase rhythm
 
-## 📌 Principle
+```bash
+journal review week               # last full week, numbers pre-filled
+journal review phase              # current phase, numbers pre-filled
+```
+
+Write the reflection by hand. Update `roadmap.yml` only when a topic is truly closed.
+
+## Layout
+
+| Path | Purpose |
+|---|---|
+| `daily/` | One file per day: minutes, tasks, one-line learning |
+| `mistakes/` | Root-cause notes, one file per mistake |
+| `knowledge/` | Distilled notes per topic |
+| `reviews/` | Weekly and phase reviews |
+| `assessments/` | Baseline and checkpoints (timed, no AI) |
+| `roadmap.yml`, `config.yml` | Topics and status; targets and thresholds |
+| `journal/`, `tests/` | The CLI and its tests |
+| `templates/` | Source for new files |
+
+## Conventions
+
+- English for notes, comments and commits.
+- Commit prefixes: `journal:`, `study:`, `debug:`, `review:`, `chore:`.
+- Never commit employer code, internal URLs or secrets.
+
+## Principle
 
 > Learn less. Build more.
 > Understand the reason behind the code, not only the syntax.

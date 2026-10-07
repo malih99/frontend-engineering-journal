@@ -1,0 +1,80 @@
+# Closing criteria for every topic (all four must hold before status: closed):
+#   1. I can explain it in two minutes, in English, without notes.
+#   2. I can implement it from scratch without help.
+#   3. I have three real examples (own code or work project; never employer code in this repo).
+#   4. I can answer its review questions correctly a week later.
+#
+# status: todo | active | closed   (closed needs closed_on: YYYY-MM-DD)
+phases:
+  - id: javascript
+    title: JavaScript
+    weeks: [1, 4]
+    topics:
+      - {id: functions, title: Functions, status: active}
+      - {id: scope-closure, title: Scope and closure, status: todo}
+      - {id: this-binding, title: "this, call, apply, bind", status: todo}
+      - {id: array-methods, title: Array methods, status: todo}
+      - {id: objects, title: Objects and prototypes, status: todo}
+      - {id: async-js, title: Async JavaScript, status: todo}
+      - {id: promises, title: Promises and async/await, status: todo}
+      - {id: event-loop, title: Event loop, status: todo}
+
+  - id: typescript
+    title: TypeScript
+    weeks: [5, 8]
+    topics:
+      - {id: types, title: Types and interfaces, status: todo}
+      - {id: unions-narrowing, title: Unions and narrowing, status: todo}
+      - {id: generics, title: Generics, status: todo}
+      - {id: utility-types, title: Utility types, status: todo}
+      - {id: api-models, title: API models and runtime validation, status: todo}
+      - {id: type-safe-react, title: Type-safe React, status: todo}
+
+  - id: debugging-live-coding
+    title: Debugging and live coding
+    weeks: [9, 12]
+    topics:
+      - {id: chrome-devtools, title: Chrome DevTools, status: todo}
+      - {id: react-devtools, title: React DevTools and Profiler, status: todo}
+      - {id: debugging-js, title: Debugging JavaScript, status: todo}
+      - {id: debugging-react, title: Debugging React, status: todo}
+      - {id: live-fn-utilities, title: "Live coding: debounce, throttle, memoize, deepClone", status: todo}
+      - {id: live-async-structures, title: "Live coding: Promise combinators, EventEmitter, LRU cache", status: todo}
+      - {id: live-react, title: "Live coding: custom hooks and UI tasks", status: todo}
+
+  - id: react-architecture
+    title: React architecture
+    weeks: [13, 16]
+    topics:
+      - {id: component-design, title: Component design, status: todo}
+      - {id: state-ownership, title: State ownership, status: todo}
+      - {id: feature-based, title: Feature-based architecture, status: todo}
+      - {id: layered, title: Layered architecture and API layer, status: todo}
+      - {id: naming, title: Naming conventions, status: todo}
+      - {id: separation-of-concerns, title: Separation of concerns, status: todo}
+
+  - id: design-patterns
+    title: Design patterns
+    weeks: [17, 20]
+    topics:
+      - {id: composition, title: Composition, status: todo}
+      - {id: strategy, title: Strategy, status: todo}
+      - {id: factory, title: Factory, status: todo}
+      - {id: adapter, title: Adapter, status: todo}
+      - {id: facade, title: Facade, status: todo}
+      - {id: observer, title: Observer, status: todo}
+      - {id: repository, title: Repository, status: todo}
+      - {id: dependency-injection, title: Dependency injection, status: todo}
+      - {id: refactoring, title: Refactoring with patterns, status: todo}
+
+  - id: engineering-project
+    title: Engineering project
+    weeks: [21, 25]
+    topics:
+      - {id: build, title: Build the capstone, status: todo}
+      - {id: debug, title: Debug it, status: todo}
+      - {id: refactor, title: Refactor it, status: todo}
+      - {id: optimize, title: Optimize it, status: todo}
+      - {id: architecture-review, title: Architecture review (ADRs), status: todo}
+      - {id: interview-simulation, title: Interview simulation, status: todo}
+      - {id: final-assessment, title: Final assessment vs baseline, status: todo}

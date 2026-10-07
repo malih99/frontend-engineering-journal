@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "frontend-engineering-journal"
+version = "0.1.0"
+description = "Personal engineering journal with a small CLI that derives progress from plain Markdown."
+requires-python = ">=3.11"
+dependencies = [
+  "PyYAML>=6.0",
+  "tzdata; platform_system == 'Windows'",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[project.scripts]
+journal = "journal.cli:main"
+
+[tool.setuptools]
+packages = ["journal"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
