@@ -29,7 +29,7 @@ def slugify(title: str) -> str:
 def new_daily(snap: Snapshot, day: date) -> tuple[Path, bool]:
     root = snap.cfg.root
     target = root / "daily" / f"{day.isoformat()}.md"
-    if target.exists():
+    if target.exists() and target.stat().st_size > 0:
         return target, False
     active = next((t.title for p in snap.phases for t in p.topics if t.status == "active"), "")
     text = _fill(

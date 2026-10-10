@@ -1,4 +1,8 @@
 # Single place for every threshold the CLI uses. Change here, not in code.
+links:                       # used by the dashboard to link to Markdown files
+  repository: https://github.com/malih99/frontend-engineering-journal
+  branch: main
+
 program:
   start: 2026-10-07          # 15 Mehr 1405
   end: 2027-03-20            # 29 Esfand 1405

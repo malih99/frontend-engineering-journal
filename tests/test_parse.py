@@ -69,3 +69,10 @@ phases:
 """
     with pytest.raises(ValidationError, match="closed_on"):
         parse_roadmap(text)
+
+
+def test_split_sections_strips_comments_and_keeps_headings():
+    from journal.parse import split_sections
+
+    body = "# Title\n\n## A\n\ntext <!-- gone -->\n\n### sub\n\n## B\n\n<!-- only comment -->\n"
+    assert split_sections(body) == {"A": "text\n\n### sub", "B": ""}
