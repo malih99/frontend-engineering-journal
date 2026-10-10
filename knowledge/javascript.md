@@ -1,4 +1,4 @@
-# Javascript
+# JavaScript
 
 Short, original notes. Link to the daily log or mistake note that produced each insight.
 
