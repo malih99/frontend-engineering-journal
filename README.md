@@ -16,8 +16,8 @@ Metric definitions and design notes: [docs/DESIGN.md](docs/DESIGN.md).
 | --- | --- |
 | Program | Week 2 of 25 |
 | Current phase | JavaScript |
-| Streak | 0 days (longest 0) |
-| Focused time | 0m |
+| Streak | 2 days (longest 2) |
+| Focused time | 4h 15m |
 | Topics closed | 0 / 43 |
 
 #### Weekly trend
@@ -25,7 +25,7 @@ Metric definitions and design notes: [docs/DESIGN.md](docs/DESIGN.md).
 | Week | Active days | Focused | Tasks done | AI independence | Mistakes fixed |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | W1 | 0 / 2 | 0m | - | - | 0 / 1 |
-| W2 * | 0 / 1 | 0m | - | - | 0 / 0 |
+| W2 * | 2 / 2 | 4h 15m | - | 55% | 0 / 0 |
 
 \* week in progress. AI independence is self-reported.
 
@@ -44,7 +44,7 @@ Metric definitions and design notes: [docs/DESIGN.md](docs/DESIGN.md).
 
 |  | Baseline | Latest | Target |
 | --- | ---: | ---: | ---: |
-| Typing | - | - | 60 WPM |
+| Typing | 11 WPM | 17 WPM | 60 WPM |
 | Benchmarks solved without AI | - | - | - |
 
 #### Mistakes
@@ -59,8 +59,8 @@ Metric definitions and design notes: [docs/DESIGN.md](docs/DESIGN.md).
 #### Last 12 weeks
 
 ```text
-Sat                        ·
-Sun                         
+Sat                        ▒
+Sun                        ▒
 Mon                         
 Tue                         
 Wed                      ·  
@@ -74,7 +74,7 @@ Fri                      ·
 
 - The first full week is still in progress. Consistency matters more than volume.
 
-<sub>Last entry: 2026-10-07</sub>
+<sub>Last entry: 2026-10-11</sub>
 
 <!-- dashboard:end -->
 
