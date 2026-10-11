@@ -10,20 +10,22 @@ recurred: false  # true if this repeats an earlier mistake
 
 # {{title}}
 
-## Symptom
+## Problem
 
-What did I observe?
+<!-- What did I observe? -->
+
+## Reproduction
+
+<!-- The smallest example that shows it. -->
 
 ## Root cause
 
-Why did it really happen? (Not "I forgot"; which wrong mental model caused it?)
+<!-- Which wrong mental model caused it? "I forgot" is not a root cause. -->
 
 ## Fix
 
-## How I will catch it next time
+## What I learned
 
-A concrete check: a lint rule, a test, a question to ask, a DevTools step.
+## Prevention
 
-## Can I reproduce and fix it from scratch without help?
-
-- [ ] Yes
+<!-- A concrete check: a lint rule, a test, a question to ask, a DevTools step. -->

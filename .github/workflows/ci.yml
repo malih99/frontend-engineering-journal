@@ -19,3 +19,5 @@ jobs:
       - run: ruff check .
       - run: pytest
       - run: journal validate
+      - run: journal export
+      - run: node --check dashboard/app.js

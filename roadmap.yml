@@ -8,6 +8,7 @@
 phases:
   - id: javascript
     title: JavaScript
+    note: javascript
     weeks: [1, 4]
     topics:
       - {id: functions, title: Functions, status: active}
@@ -21,6 +22,7 @@ phases:
 
   - id: typescript
     title: TypeScript
+    note: typescript
     weeks: [5, 8]
     topics:
       - {id: types, title: Types and interfaces, status: todo}
@@ -32,6 +34,7 @@ phases:
 
   - id: debugging-live-coding
     title: Debugging and live coding
+    note: debugging
     weeks: [9, 12]
     topics:
       - {id: chrome-devtools, title: Chrome DevTools, status: todo}
@@ -44,6 +47,7 @@ phases:
 
   - id: react-architecture
     title: React architecture
+    note: architecture
     weeks: [13, 16]
     topics:
       - {id: component-design, title: Component design, status: todo}
@@ -55,6 +59,7 @@ phases:
 
   - id: design-patterns
     title: Design patterns
+    note: design-patterns
     weeks: [17, 20]
     topics:
       - {id: composition, title: Composition, status: todo}

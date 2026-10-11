@@ -14,7 +14,7 @@ Metric definitions and design notes: [docs/DESIGN.md](docs/DESIGN.md).
 
 |  |  |
 | --- | --- |
-| Program | Week 1 of 25 |
+| Program | Week 2 of 25 |
 | Current phase | JavaScript |
 | Streak | 0 days (longest 0) |
 | Focused time | 0m |
@@ -24,7 +24,8 @@ Metric definitions and design notes: [docs/DESIGN.md](docs/DESIGN.md).
 
 | Week | Active days | Focused | Tasks done | AI independence | Mistakes fixed |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| W1 * | 0 / 1 | 0m | - | - | 0 / 1 |
+| W1 | 0 / 2 | 0m | - | - | 0 / 1 |
+| W2 * | 0 / 1 | 0m | - | - | 0 / 0 |
 
 \* week in progress. AI independence is self-reported.
 
@@ -58,22 +59,22 @@ Metric definitions and design notes: [docs/DESIGN.md](docs/DESIGN.md).
 #### Last 12 weeks
 
 ```text
-Sat                         
+Sat                        ·
 Sun                         
 Mon                         
 Tue                         
-Wed                        ·
-Thu                         
-Fri                         
+Wed                      ·  
+Thu                      ·  
+Fri                      ·  
 
 · none   ░ partial   ▒ minimum   ▓ good   █ excellent   ○ excused
 ```
 
 #### Notes
 
-- No entries yet. Run `journal new` to create today's log.
+- The first full week is still in progress. Consistency matters more than volume.
 
-<sub>Last entry: none</sub>
+<sub>Last entry: 2026-10-07</sub>
 
 <!-- dashboard:end -->
 
@@ -120,7 +121,20 @@ journal validate
 git add . && git commit -m "journal: 2026-10-07" && git push
 ```
 
-Pushing to `main` runs GitHub Actions, which validates the files and refreshes the dashboard.
+Pushing to `main` runs GitHub Actions, which validates the files and refreshes the README dashboard.
+
+## Web dashboard
+
+A static, framework-free view of the same data (overview, daily log, progress charts, knowledge,
+mistakes, reviews). It never stores anything; it renders what the Markdown files say.
+
+```bash
+journal serve                     # http://127.0.0.1:8000, re-reads your files on every refresh
+journal export                    # writes dashboard/data.json for static hosting
+```
+
+If a file is invalid, the page shows which file to fix instead of rendering wrong numbers.
+Details: [docs/DESIGN.md](docs/DESIGN.md#web-dashboard). Machine setup: [SETUP.md](SETUP.md).
 
 ## Weekly and phase rhythm
 
@@ -141,6 +155,7 @@ Write the reflection by hand. Update `roadmap.yml` only when a topic is truly cl
 | `reviews/` | Weekly and phase reviews |
 | `assessments/` | Baseline and checkpoints (timed, no AI) |
 | `roadmap.yml`, `config.yml` | Topics and status; targets and thresholds |
+| `dashboard/` | Static web dashboard (`index.html`, `styles.css`, `app.js`); `data.json` is generated |
 | `journal/`, `tests/` | The CLI and its tests |
 | `templates/` | Source for new files |
 

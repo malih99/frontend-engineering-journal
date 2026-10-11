@@ -5,7 +5,7 @@ import sys
 from datetime import date
 from pathlib import Path
 
-from journal import metrics, parse, render, scaffold
+from journal import export, metrics, parse, render, scaffold, server
 from journal.config import Config, find_root, load_config
 from journal.metrics import Snapshot
 from journal.models import AREAS, ValidationError
@@ -57,6 +57,12 @@ def _parser() -> argparse.ArgumentParser:
     sub.add_parser("validate", help="check every file against the schema")
     sub.add_parser("stats", help="print the dashboard to the terminal")
     sub.add_parser("update", help="rewrite the dashboard block in README.md")
+
+    export = sub.add_parser("export", help="write the generated JSON used by the web dashboard")
+    export.add_argument("--out", type=Path, default=Path("dashboard/data.json"))
+
+    serve = sub.add_parser("serve", help="serve the web dashboard locally (reads files live)")
+    serve.add_argument("--port", type=int, default=8000)
     return p
 
 
@@ -77,8 +83,11 @@ def main(argv: list[str] | None = None) -> int:
         )
         return 0
 
-    if errors:  # never compute on top of broken data
-        return _report(errors)
+    if errors and args.command not in ("new", "mistake"):
+        return _report(errors)  # never compute on top of broken data
+    if errors:  # creating a file must still work, otherwise a broken file could never be fixed
+        for message in errors:
+            print(f"warning: {message}", file=sys.stderr)
 
     if args.command == "new":
         path, created = scaffold.new_daily(snap, args.date or snap.today)
@@ -95,6 +104,14 @@ def main(argv: list[str] | None = None) -> int:
             if not 1 <= number <= len(snap.phases):
                 return _report([f"phase must be between 1 and {len(snap.phases)}"])
             path, created = scaffold.new_phase_review(snap, number)
+    elif args.command == "export":
+        out = args.out if args.out.is_absolute() else cfg.root / args.out
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(export.to_json(snap), encoding="utf-8")
+        print(f"wrote {out.relative_to(cfg.root)}")
+        return 0
+    elif args.command == "serve":
+        return server.serve(cfg, args.port)
     elif args.command == "stats":
         print(render.render_dashboard(snap))
         return 0

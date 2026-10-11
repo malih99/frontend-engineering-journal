@@ -28,7 +28,9 @@ from journal.models import (
 _FRONT = re.compile(r"\A---\r?\n(.*?)\r?\n---\r?\n?(.*)\Z", re.S)
 _HEADING = re.compile(r"^#{1,6}\s+")
 _TASKS_HEADING = re.compile(r"^##\s+tasks\s*$", re.I)
-_TASK = re.compile(r"^\s*[-*]\s+\[([ xX])\]\s+\S")
+_TASK = re.compile(r"^\s*[-*]\s+\[([ xX])\]\s+(\S.*)$")
+_COMMENT = re.compile(r"<!--.*?-->", re.S)
+_H2 = re.compile(r"^##\s+(.*\S)\s*$")
 _DAILY_NAME = re.compile(r"^\d{4}-\d{2}-\d{2}\.md$")
 _MISTAKE_NAME = re.compile(r"^\d{4}-\d{2}-\d{2}-[a-z0-9][a-z0-9-]*\.md$")
 
@@ -41,6 +43,10 @@ _ASSESSMENT_KEYS = {"date", "kind", "typing_wpm", "typing_accuracy", "benchmarks
 
 
 def split_front_matter(text: str) -> tuple[dict, str]:
+    if not text.strip():
+        raise ValidationError(
+            "file is empty (run `journal new` to regenerate it from the template)"
+        )
     match = _FRONT.match(text)
     if not match:
         raise ValidationError("missing YAML front matter (--- block at the top)")
@@ -98,18 +104,37 @@ def _reject_unknown(data: dict, allowed: set[str]) -> None:
         raise ValidationError(f"unknown field(s): {', '.join(sorted(map(str, unknown)))}")
 
 
-def count_tasks(body: str) -> tuple[int, int]:
-    """Count checked / total task items under the '## Tasks' heading only."""
-    done = total = 0
+def parse_tasks(body: str) -> tuple[tuple[bool, str], ...]:
+    """Task items (done, text) under the '## Tasks' heading only; empty boxes are ignored."""
+    tasks: list[tuple[bool, str]] = []
     in_tasks = False
     for line in body.splitlines():
         if _HEADING.match(line):
             in_tasks = bool(_TASKS_HEADING.match(line.strip()))
             continue
         if in_tasks and (m := _TASK.match(line)):
-            total += 1
-            done += m.group(1) in "xX"
-    return done, total
+            tasks.append((m.group(1) in "xX", m.group(2).strip()))
+    return tuple(tasks)
+
+
+def count_tasks(body: str) -> tuple[int, int]:
+    tasks = parse_tasks(body)
+    return sum(done for done, _ in tasks), len(tasks)
+
+
+def split_sections(body: str) -> dict[str, str]:
+    """Text of every level-2 section, with HTML comments removed. Keys are the headings."""
+    sections: dict[str, list[str]] = {}
+    current: str | None = None
+    for line in _COMMENT.sub("", body).splitlines():
+        if heading := _H2.match(line):
+            current = heading.group(1)
+            sections[current] = []
+        elif _HEADING.match(line) and not line.startswith("###"):
+            current = None
+        elif current is not None:
+            sections[current].append(line.rstrip())
+    return {k: "\n".join(v).strip() for k, v in sections.items()}
 
 
 def parse_daily(text: str, path: Path) -> Daily:
@@ -125,7 +150,7 @@ def parse_daily(text: str, path: Path) -> Daily:
     minutes = {
         a: _number(raw_minutes.get(a, 0), f"minutes.{a}", 0, 720, integer=True) for a in ACTIVITIES
     }
-    done, total = count_tasks(body)
+    tasks = parse_tasks(body)
     return Daily(
         date=day,
         focus=str(data.get("focus") or "").strip(),
@@ -136,14 +161,16 @@ def parse_daily(text: str, path: Path) -> Daily:
         excused=_bool(data.get("excused", False), "excused"),
         typing_wpm=_optional(data.get("typing_wpm"), "typing_wpm", 1, 250),
         typing_accuracy=_optional(data.get("typing_accuracy"), "typing_accuracy", 0, 100),
-        tasks_done=done,
-        tasks_total=total,
+        tasks_done=sum(done for done, _ in tasks),
+        tasks_total=len(tasks),
         path=path,
+        tasks=tasks,
+        sections=split_sections(body),
     )
 
 
 def parse_mistake(text: str, path: Path) -> Mistake:
-    data, _ = split_front_matter(text)
+    data, body = split_front_matter(text)
     _reject_unknown(data, _MISTAKE_KEYS)
     status = _choice(data.get("status"), "status", MISTAKE_STATUS)
     resolved_on = data.get("resolved_on")
@@ -161,6 +188,7 @@ def parse_mistake(text: str, path: Path) -> Mistake:
         ai_help=_choice(data.get("ai_help", "none"), "ai_help", ("none", *AI_LEVELS[1:])),
         recurred=_bool(data.get("recurred", False), "recurred"),
         path=path,
+        sections=split_sections(body),
     )
 
 
@@ -219,7 +247,9 @@ def parse_roadmap(text: str) -> list[Phase]:
                 )
             )
         first, last = p["weeks"]
-        phases.append(Phase(p["id"], p["title"], int(first), int(last), tuple(topics)))
+        phases.append(
+            Phase(p["id"], p["title"], int(first), int(last), tuple(topics), p.get("note"))
+        )
     return phases
 
 

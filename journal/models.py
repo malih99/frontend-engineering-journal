@@ -39,6 +39,8 @@ class Daily:
     tasks_done: int
     tasks_total: int
     path: Path
+    tasks: tuple[tuple[bool, str], ...] = ()
+    sections: dict[str, str] = field(default_factory=dict)
 
     @property
     def total_minutes(self) -> int:
@@ -55,6 +57,7 @@ class Mistake:
     ai_help: str
     recurred: bool
     path: Path
+    sections: dict[str, str] = field(default_factory=dict)
 
 
 @dataclass(frozen=True)
@@ -97,6 +100,7 @@ class Phase:
     first_week: int
     last_week: int
     topics: tuple[Topic, ...] = field(default_factory=tuple)
+    note: str | None = None  # knowledge/<note>.md that belongs to this phase
 
     @property
     def closed(self) -> int:

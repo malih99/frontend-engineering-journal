@@ -30,6 +30,8 @@ class Config:
     min_learning_minutes: int
     require_learned: bool
     ai_weights: dict[str, float]
+    repository: str | None = None
+    branch: str = "main"
 
     @property
     def daily_target_total(self) -> int:
@@ -87,6 +89,8 @@ def load_config(root: Path) -> Config:
             min_learning_minutes=int(valid["min_learning_minutes"]),
             require_learned=bool(valid["require_learned_note"]),
             ai_weights=weights,
+            repository=(raw.get("links") or {}).get("repository"),
+            branch=str((raw.get("links") or {}).get("branch", "main")),
         )
     except (KeyError, TypeError) as exc:
         raise ValidationError(f"config.yml is missing or has an invalid key: {exc}") from exc
